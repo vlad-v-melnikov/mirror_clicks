@@ -1,11 +1,11 @@
 import pyautogui
 
-def compare_images():
+def compare_images(screenshot_region=(30, 215, 920, 715), compare_region=(970, 110, 950, 980), confidence_level=0.9):
     print("Comparing images...")
-    pyautogui.screenshot('left.png', region=(30, 215, 920, 715))
-    result = pyautogui.locateOnScreen('left.png', \
-        region=(970, 110, 950, 980),\
-        confidence=0.9)
+    pyautogui.screenshot('screenshot\\left.png', region=screenshot_region)
+    result = pyautogui.locateOnScreen('screenshot\\left.png', \
+        region=compare_region,\
+        confidence=confidence_level)
 
     if result:
         print('Images match')
