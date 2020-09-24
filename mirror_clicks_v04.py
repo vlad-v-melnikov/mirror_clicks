@@ -1,6 +1,6 @@
 from pynput import keyboard, mouse
 import pyautogui, logging
-from include.compare import compare_images
+from modules.compare import compare_images
 
 keymap_exit = {
     'ESC' : 27,
@@ -10,7 +10,7 @@ keymap_action = {
     'x' : 88,
     'c' : 67,
     'ENTER' : 13,
-    'SPACE' : 32,
+    'SPACE' : 32, #make sure space is deactivated in the browser
 }
 
 keymap_compare = {
