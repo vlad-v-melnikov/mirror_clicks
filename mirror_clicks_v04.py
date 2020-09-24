@@ -1,5 +1,5 @@
 from pynput import keyboard, mouse
-import pyautogui, logging
+import pyautogui, logging, json
 from modules.compare import compare_images
 
 keymap_exit = {
