@@ -25,7 +25,6 @@ def jump_mouse():
     pyautogui.click(button='left')
     print("Click", end='... ')
     
-    #pyautogui.moveRel(width/2, 0)
     pos_x, pos_y = pyautogui.position()
     pyautogui.click(x=pos_x + width/2, y=pos_y, button='left')
     logging.debug("Clicking at {}".format(pyautogui.position()))
