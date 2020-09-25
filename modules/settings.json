@@ -12,10 +12,10 @@
         "BackSlash": 220
     },
     "keymap_conf_up": {
-        "Arrow Up": 38
+        "Plus": 187
     },
     "keymap_conf_down": {
-        "Arrow Up": 40
+        "Minus": 189
     },
     "screenshot_region": [
         30,
