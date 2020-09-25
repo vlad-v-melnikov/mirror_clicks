@@ -7,7 +7,7 @@ class Settings:
     
     def __init__(self) -> None:
         try:
-            with open('settings.json') as f:
+            with open('modules\\settings.json') as f:
                 settings = json.load(f)
             
             self.keymap_exit = settings['keymap_exit']
@@ -27,11 +27,11 @@ class Settings:
         self.screen_width, self.screen_height = size()
 
     def key_prompt(self):
-        print("Press {} to click/mirror click.".format(self.keymap_action.keys()))
-        print("Press {} to compare images.".format(self.keymap_compare.keys()))
-        print("Press {} to increase confidence level.".format(self.keymap_conf_up.keys()))
-        print("Press {} to reduce confidence level.".format(self.keymap_conf_down.keys()))
-        print("Press {} to quit.".format(self.keymap_exit.keys()))
+        print("Press {} to click/mirror click.".format(list(self.keymap_action.keys())))
+        print("Press {} to compare images.".format(list(self.keymap_compare.keys())))
+        print("Press {} to increase confidence level.".format(list(self.keymap_conf_up.keys())))
+        print("Press {} to reduce confidence level.".format(list(self.keymap_conf_down.keys())))
+        print("Press {} to quit.".format(list(self.keymap_exit.keys())))
 
     def conf_up(self):
         if self.confidence_level == 1:

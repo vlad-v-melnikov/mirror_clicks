@@ -1,7 +1,7 @@
 from pynput import keyboard
 import pyautogui, logging, msvcrt
 from modules.compare import compare_images
-from settings import Settings
+from modules.settings import Settings
 
 ###################################################
 
