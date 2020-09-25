@@ -39,10 +39,12 @@ def on_press(key):
         print(f'Key {vk} is not bound.')
 
 ###################################################
+
 print("Starting...")
 print("Press {} to click/mirror click.".format(settings.keymap_action.keys()))
 print("Press {} to compare images.".format(settings.keymap_compare.keys()))
 print("Press {} to quit.".format(settings.keymap_exit.keys()))
+
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
     
