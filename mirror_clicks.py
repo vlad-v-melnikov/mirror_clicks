@@ -1,9 +1,10 @@
 from pynput import keyboard
-import pyautogui, logging, json
+import pyautogui, logging, msvcrt
 from modules.compare import compare_images
 from settings import Settings
 
 ###################################################
+
 settings = Settings()
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -29,21 +30,32 @@ def on_press(key):
     logging.debug('key pressed = ', vk)
 
     if(vk in settings.keymap_exit.values()):
+        if settings.isChanged:
+            settings.save_settings()
+            print("Settings saved.")
+            while msvcrt.kbhit(): #flushing the buffer to prevent issue with chars typed after ESC 
+                msvcrt.getch()
         return False
     
-    if(vk in settings.keymap_action.values()):
+    elif(vk in settings.keymap_action.values()):
         jump_mouse()
+
     elif(vk in settings.keymap_compare.values()):
         compare_images(settings.screenshot_region, settings.compare_region, settings.confidence_level)
+    
+    elif(vk in settings.keymap_conf_up.values()):
+        settings.conf_up()
+
+    elif(vk in settings.keymap_conf_down.values()):
+        settings.conf_down()
+
     else:
         print(f'Key {vk} is not bound.')
 
 ###################################################
 
 print("Starting...")
-print("Press {} to click/mirror click.".format(settings.keymap_action.keys()))
-print("Press {} to compare images.".format(settings.keymap_compare.keys()))
-print("Press {} to quit.".format(settings.keymap_exit.keys()))
+settings.key_prompt()
 
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()

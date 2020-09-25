@@ -1,25 +1,33 @@
 {
-    "keymap_exit":
-    {
+    "keymap_exit": {
         "ESC": 27
     },
-    
-    "keymap_action":
-    {
-        "x" : 88,
-        "c" : 67,
-        "ENTER" : 13
+    "keymap_action": {
+        "x": 88,
+        "c": 67,
+        "ENTER": 13
     },
-    
-    "keymap_compare": 
-    {
-        "z" : 90,
-        "BackSlash" : 220
+    "keymap_compare": {
+        "z": 90,
+        "BackSlash": 220
     },
-    
-    "screenshot_region": [30, 215, 920, 715],
-
-    "compare_region": [970, 110, 950, 980],
-
-    "confidence_level": 0.9
+    "keymap_conf_up": {
+        "Arrow Up": 38
+    },
+    "keymap_conf_down": {
+        "Arrow Up": 40
+    },
+    "screenshot_region": [
+        30,
+        215,
+        920,
+        715
+    ],
+    "compare_region": [
+        970,
+        110,
+        950,
+        980
+    ],
+    "confidence_level": 0.95
 }
