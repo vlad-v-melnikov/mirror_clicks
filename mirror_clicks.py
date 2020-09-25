@@ -2,23 +2,25 @@ from pynput import keyboard, mouse
 import pyautogui, logging, json
 from modules.compare import compare_images
 
-keymap_exit = {
-    'ESC' : 27,
-}
+###################################################
+try:
+    with open('settings.json') as f:
+        settings = json.load(f)
+    keymap_exit = settings['keymap_exit']
+    keymap_action = settings['keymap_action']
+    keymap_compare = settings['keymap_compare']
+    screenshot_region = tuple(settings['screenshot_region'])
+    compare_region = tuple(settings['compare_region'])
+    confidence_level = settings['confidence_level']
 
-keymap_action = {
-    'x' : 88,
-    'c' : 67,
-    'ENTER' : 13,
-    'SPACE' : 32, #make sure space is deactivated in the browser
-}
+except FileNotFoundError:
+    print("settings.json file not found. Quitting the script...")
+    exit()
 
-keymap_compare = {
-    'z' : 90,
-}
-
-width, height = pyautogui.size()
+screen_width, screen_height = pyautogui.size()
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+###################################################
 
 def jump_mouse():
     logging.debug("Clicking at at {}".format(pyautogui.position()))
@@ -26,11 +28,11 @@ def jump_mouse():
     print("Click", end='... ')
     
     pos_x, pos_y = pyautogui.position()
-    pyautogui.click(x=pos_x + width/2, y=pos_y, button='left')
+    pyautogui.click(x=pos_x + screen_width/2, y=pos_y, button='left')
     logging.debug("Clicking at {}".format(pyautogui.position()))
     print("Move... Click", end='...')
     
-    pyautogui.moveRel(-width/2, 0)
+    pyautogui.moveRel(-screen_width/2, 0)
     logging.debug("Moved back to {}".format(pyautogui.position()))
 
     print("Move back.")
@@ -45,10 +47,9 @@ def on_press(key):
     if(vk in keymap_action.values()):
         jump_mouse()
     elif(vk in keymap_compare.values()):
-        compare_images()
+        compare_images(screenshot_region, compare_region, confidence_level)
     else:
         print(f'Key {vk} is not bound.')
-    
 
 with keyboard.Listener(on_press=on_press) as listener:
     print("Starting...")
