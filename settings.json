@@ -1,0 +1,25 @@
+{
+    "keymap_exit":
+    {
+        "ESC": 27
+    },
+    
+    "keymap_action":
+    {
+        "x" : 88,
+        "c" : 67,
+        "ENTER" : 13,
+        "SPACE" : 32
+    },
+    
+    "keymap_compare": 
+    {
+        "z" : 90
+    },
+
+    "screenshot_region": [30, 215, 920, 715],
+
+    "compare_region": [970, 110, 950, 980],
+
+    "confidence_level": 0.9
+}
