@@ -4,10 +4,11 @@ from pyautogui import size
 class Settings:
     
     isChanged = False
+    SETTINGS_PATH = 'modules\\settings.json'
     
     def __init__(self) -> None:
         try:
-            with open('modules\\settings.json') as f:
+            with open(self.SETTINGS_PATH) as f:
                 settings = json.load(f)
             
             self.keymap_exit = settings['keymap_exit']
@@ -61,5 +62,5 @@ class Settings:
             "confidence_level" : self.confidence_level \
         }
         
-        with open('modules\settings.json', 'w') as f:
+        with open(self.SETTINGS_PATH, 'w') as f:
             json.dump(data, f, indent=4)
