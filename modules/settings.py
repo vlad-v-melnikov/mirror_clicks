@@ -51,15 +51,15 @@ class Settings:
         self.isChanged = True
 
     def save_settings(self):
-        data = {\
-            "keymap_exit" : self.keymap_exit, \
-            "keymap_action" : self.keymap_action, \
-            "keymap_compare" : self.keymap_compare, \
-            "keymap_conf_up" : self.keymap_conf_up, \
-            "keymap_conf_down" : self.keymap_conf_down,\
-            "screenshot_region" : self.screenshot_region, \
-            "compare_region" : self.compare_region, \
-            "confidence_level" : self.confidence_level \
+        data = {
+            "keymap_exit" : self.keymap_exit,
+            "keymap_action" : self.keymap_action,
+            "keymap_compare" : self.keymap_compare,
+            "keymap_conf_up" : self.keymap_conf_up,
+            "keymap_conf_down" : self.keymap_conf_down,
+            "screenshot_region" : self.screenshot_region,
+            "compare_region" : self.compare_region,
+            "confidence_level" : self.confidence_level,
         }
         
         with open(self.SETTINGS_PATH, 'w') as f:
