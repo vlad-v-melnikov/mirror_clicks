@@ -2,8 +2,10 @@
     "keymap_exit": {
         "ESC": 27
     },
+    "keymap_pause": {
+        "`": 192
+    },
     "keymap_action": {
-        "x": 88,
         "c": 67,
         "ENTER": 13
     },

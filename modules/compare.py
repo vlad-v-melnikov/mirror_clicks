@@ -1,5 +1,6 @@
 import pyautogui, os
 
+
 def compare_images(screenshot_region, compare_region, confidence_level=0.95):
     print("Comparing images...")
 
