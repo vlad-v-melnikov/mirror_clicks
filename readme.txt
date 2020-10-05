@@ -42,8 +42,8 @@ in the same position and the cursor returns to the left window.
 - When you open an image that needs to be compared between TEST and PROD (remember, they need to be alinged, and correct settings need to be in settings.json), 
 press the button associated with "keymap_compare". The result of matching is printed in the console where the script is running.
 
-- If you disagree with the comparison result, adjust "confidence level" with UP and DOWN arrows. The maxmimum value is 1, the minimum is 0.05. Usually 1 does not make a match happen
-no matter what you do, so the actual setting you should be using is 0.95. Do not go under 0.8, or it will match images that you can say are different with a naked eye.
+- If you disagree with the comparison result, adjust "confidence level" with UP and DOWN arrows, with a step of 0.01. The maxmimum value is 1, the minimum is 0.01. Usually 1 does not make a match happen
+no matter what you do, so the actual setting you should be using is 0.95. Do not go under 0.8, or it will match images that you can say` are different with a naked eye.
 "Confidence level" establishes how much of the pixels have to be the same between two images.
 
 - When you are going to finish, press ESC and the script will complete.

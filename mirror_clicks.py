@@ -7,6 +7,7 @@ from modules.settings import Settings
 
 settings = Settings()
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+current = set()
 
 ###################################################
 
@@ -15,13 +16,13 @@ def jump_mouse():
     logging.debug("Clicking at at {}".format(pyautogui.position()))
     pyautogui.click(button='left')
     print("Click", end='... ')
-    
+
     pos_x, pos_y = pyautogui.position()
-    pyautogui.click(x=pos_x + settings.screen_width/2, y=pos_y, button='left')
+    pyautogui.click(x=pos_x + settings.screen_width / 2, y=pos_y, button='left')
     logging.debug("Clicking at {}".format(pyautogui.position()))
     print("Move... Click", end='...')
-    
-    pyautogui.moveRel(-settings.screen_width/2, 0)
+
+    pyautogui.moveRel(-settings.screen_width / 2, 0)
     logging.debug("Moved back to {}".format(pyautogui.position()))
 
     print("Move back.")
@@ -35,13 +36,18 @@ def on_press(key):
         if settings.is_changed:
             settings.save_settings()
             print("Settings saved.")
-            while msvcrt.kbhit(): #flushing the buffer to prevent issue with chars typed after ESC 
+            while msvcrt.kbhit():  # flushing the buffer to prevent issue with chars typed after ESC
                 msvcrt.getch()
         return False
-    
+
+    # here, we use a combination of keys, like Ctrl-P
     if vk in settings.keymap_pause.values():
-        settings.pause()
-        return
+        current.add(vk)
+        if all_match(current, set(settings.keymap_pause.values())):
+            settings.pause()
+            return
+        else:
+            return
 
     if settings.is_paused:
         return
@@ -59,11 +65,23 @@ def on_press(key):
     elif vk in settings.keymap_conf_up.values():
         settings.conf_up() if not settings.is_paused else print("Script paused")
 
-    elif vk in settings.keymap_conf_down.values() and not settings.is_paused :
+    elif vk in settings.keymap_conf_down.values() and not settings.is_paused:
         settings.conf_down()
 
     else:
         print(f'Key {vk} is not bound.')
+
+
+def on_release(key):
+    current.clear()
+    pass
+
+
+def all_match(pressed_keys: set, all_keys: set):
+    if not all_keys.difference(pressed_keys):
+        return True
+    else:
+        return False
 
 ###################################################
 
@@ -71,5 +89,5 @@ def on_press(key):
 print("Starting...")
 settings.key_prompt()
 
-with keyboard.Listener(on_press=on_press) as listener:
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()

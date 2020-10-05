@@ -6,6 +6,7 @@ class Settings:
     is_changed = False
     is_paused = False
     SETTINGS_PATH = 'modules\\settings.json'
+    CONF_STEP = 0.01
 
     def __init__(self) -> None:
         try:
@@ -49,15 +50,15 @@ class Settings:
         if self.confidence_level == 1:
             print("Confidence level is MAXIMUM.")
             return
-        self.confidence_level = (int(self.confidence_level * 100) + 5) / 100
+        self.confidence_level = (int(self.confidence_level * 100) + int(self.CONF_STEP * 100)) / 100
         print("Confidence level up, now it is " + str(self.confidence_level))
         self.is_changed = True
 
     def conf_down(self):
-        if self.confidence_level == 0.05:
+        if self.confidence_level == self.CONF_STEP:
             print("Confidence level is MINIMUM.")
             return
-        self.confidence_level = (int(self.confidence_level * 100) - 5) / 100
+        self.confidence_level = (int(self.confidence_level * 100) - int(self.CONF_STEP * 100)) / 100
         print("Confidence level up, now it is " + str(self.confidence_level))
         self.is_changed = True
 

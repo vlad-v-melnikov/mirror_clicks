@@ -3,15 +3,14 @@
         "ESC": 27
     },
     "keymap_pause": {
-        "`": 192
+        "LCtrl": 162,
+        "BackSlash": 220
     },
     "keymap_action": {
-        "c": 67,
-        "ENTER": 13
+        "c": 67
     },
     "keymap_compare": {
-        "z": 90,
-        "BackSlash": 220
+        "z": 90
     },
     "keymap_conf_up": {
         "Plus": 187
@@ -31,5 +30,5 @@
         950,
         980
     ],
-    "confidence_level": 0.95
+    "confidence_level": 0.98
 }
