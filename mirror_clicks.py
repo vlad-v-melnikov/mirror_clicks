@@ -63,7 +63,7 @@ def on_press(key):
         )
 
     elif vk in settings.keymap_conf_up.values():
-        settings.conf_up() if not settings.is_paused else print("Script paused")
+        settings.conf_up()
 
     elif vk in settings.keymap_conf_down.values() and not settings.is_paused:
         settings.conf_down()
@@ -85,9 +85,13 @@ def all_match(pressed_keys: set, all_keys: set):
 
 ###################################################
 
+def main():
+    print("Starting...")
+    settings.key_prompt()
 
-print("Starting...")
-settings.key_prompt()
+    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join()
 
-with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
+
+if __name__ == "__main__":
+    main()
