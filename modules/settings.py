@@ -36,7 +36,6 @@ class Settings:
             print("Script PAUSED.")
         else:
             print("Script continues.")
-        pass
 
     def key_prompt(self):
         print("Press {} to click/mirror click.".format(list(self.keymap_action.keys())))

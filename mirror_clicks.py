@@ -1,5 +1,6 @@
 from pynput import keyboard
-import pyautogui, logging, msvcrt
+import pyautogui
+import logging
 from modules.compare import compare_images
 from modules.settings import Settings
 
@@ -12,7 +13,7 @@ current = set()
 ###################################################
 
 
-def jump_mouse():
+def _jump_mouse():
     logging.debug("Clicking at at {}".format(pyautogui.position()))
     pyautogui.click(button='left')
     print("Click", end='... ')
@@ -32,15 +33,18 @@ def on_press(key):
     vk = key.vk if hasattr(key, 'vk') else key.value.vk
     logging.debug('key pressed = ', vk)
 
+    # here, we use a combination of keys, like LShift-Esc
     if vk in settings.keymap_exit.values():
-        if settings.is_changed:
-            settings.save_settings()
-            print("Settings saved.")
-            while msvcrt.kbhit():  # flushing the buffer to prevent issue with chars typed after ESC
-                msvcrt.getch()
-        return False
+        current.add(vk)
+        if all_match(current, set(settings.keymap_exit.values())):
+            if settings.is_changed:
+                settings.save_settings()
+                print("Settings saved.")
+            return False
+        else:
+            return
 
-    # here, we use a combination of keys, like Ctrl-P
+    # here, we use a combination of keys, like LCtrl-/
     if vk in settings.keymap_pause.values():
         current.add(vk)
         if all_match(current, set(settings.keymap_pause.values())):
@@ -53,7 +57,7 @@ def on_press(key):
         return
 
     if vk in settings.keymap_action.values():
-        jump_mouse()
+        _jump_mouse()
 
     elif vk in settings.keymap_compare.values():
         compare_images(
@@ -84,6 +88,7 @@ def all_match(pressed_keys: set, all_keys: set):
         return False
 
 ###################################################
+
 
 def main():
     print("Starting...")

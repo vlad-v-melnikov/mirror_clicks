@@ -1,10 +1,11 @@
 {
     "keymap_exit": {
+        "Win": 91,
         "ESC": 27
     },
     "keymap_pause": {
         "LCtrl": 162,
-        "BackSlash": 220
+        "Tilda": 192
     },
     "keymap_action": {
         "c": 67
